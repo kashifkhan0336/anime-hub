@@ -3,7 +3,7 @@ import Slider from "./Slider";
 import { options, fetchData } from "../fetchData";
 
 const Genre = () => {
-  const [genres, setGenres] = useState([{_id:"Aall"}]);
+  const [genres, setGenres] = useState([{_id:"All"}]);
   useEffect(() => {
     const fetchGenres = async () => {
       const genreData = await fetchData(
@@ -13,7 +13,6 @@ const Genre = () => {
       setGenres([{_id: "All"}, ...genreData]);
     };
     fetchGenres()
-    console.log(genres)
   }, []);
   return (
     <div className="genre">

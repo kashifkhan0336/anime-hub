@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Genre from "../components/Genre";
 import SearchAnime from "../components/SearchAnime";
 import Slider from "../components/Slider";
@@ -19,10 +19,12 @@ const heroSliderImgs = [
 ]
 
 const Home = () => {
+  const [animeData, setAnimeData] = useState([]);
+
   return (
     <div className="hero container">
       <Slider data={heroSliderImgs} perPage={1} />
-      <SearchAnime />
+      <SearchAnime setAnimeData={setAnimeData} />
       <Genre />
     </div>
   );
