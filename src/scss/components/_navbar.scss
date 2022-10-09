@@ -9,30 +9,30 @@
     @include u.breakpoint-up(md) {
         font-size: 1.5rem;
     }
-}
 
-.navbar__logo {
-    font-size: 1.5em;
-    font-weight: 700;
-    color: var(--primary);
-}
-
-.navbar__links {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    font-size: 1.1em;
-    color: var(--text);
-
-    @include u.breakpoint-up(md) {
-        gap: 40px;
+    &__logo {
+        font-size: 1.5em;
+        font-weight: 700;
+        color: var(--primary);
     }
-}
 
-.navbar__link--active::after {
-    content: "";
-    display: block;
-    width: 75%;
-    height: 4px;
-    background-color: var(--primary);
+    &__links {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        font-size: 1.1em;
+        color: var(--text);
+    
+        @include u.breakpoint-up(md) {
+            gap: 40px;
+        }
+    }
+
+    &__link--active::after {
+        content: "";
+        display: block;
+        width: 75%;
+        height: 4px;
+        background-color: var(--primary);
+    }
 }

@@ -2,3 +2,9 @@
     width: min(100% - 20px, 1280px);
     margin-inline: auto;
 }
+
+.heading {
+    // text-align: center;
+    font-size: clamp(1.8rem, 1.66rem + 0.7vw, 2.5rem);
+    color: var(--text);
+}

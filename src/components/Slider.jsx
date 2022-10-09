@@ -1,28 +1,26 @@
 import React from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
-import Slide1 from "../assets/images/slide-1.jpg";
-import Slide2 from "../assets/images/slide-2.jpg";
-import Slide3 from "../assets/images/slide-3.jpg";
+import GenreCard from "./GenreCard";
 
-const Slider = () => {
+const Slider = ({ data, perPage }) => {
   return (
     <Splide
       aria-label="My Favorite Images"
       options={{
-        heightRatio: 0.5,
-        cover: true
+        heightRatio: perPage > 1 ? 0.3 : 0.5,
+        cover: true,
+        perPage: perPage,
+        gap: perPage > 1 ? "20px" : "0px"
       }}
     >
-      <SplideSlide>
-        <img src={Slide1} alt="Image 1" />
-      </SplideSlide>
-      <SplideSlide>
-        <img src={Slide2} alt="Image 2" />
-      </SplideSlide>
-      <SplideSlide>
-        <img src={Slide3} alt="Image 2" />
-      </SplideSlide>
+      {data.map((item, index) => {
+        return (
+          <SplideSlide key={index}>
+            {item.url ? <img src={item.url} alt="Image 1" /> : <GenreCard genreName={item._id} />}
+          </SplideSlide>
+        );
+      })}
     </Splide>
   );
 };
