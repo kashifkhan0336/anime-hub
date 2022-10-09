@@ -1,0 +1,38 @@
+@use "../utils" as u;
+
+.navbar {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    @include u.breakpoint-up(md) {
+        font-size: 1.5rem;
+    }
+}
+
+.navbar__logo {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.navbar__links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 1.1em;
+    color: var(--text);
+
+    @include u.breakpoint-up(md) {
+        gap: 40px;
+    }
+}
+
+.navbar__link--active::after {
+    content: "";
+    display: block;
+    width: 75%;
+    height: 4px;
+    background-color: var(--primary);
+}
