@@ -7,11 +7,12 @@ const SearchAnime = ({setAnimeData}) => {
 
   const fetchSearchedAnime = async () => {
     const searchedData = await fetchData(
-      `https://anime-db.p.rapidapi.com/anime?page=1&size=10&search=${animeSearch}`,
+      `https://anime-db.p.rapidapi.com/anime?page=1&size=20&search=${animeSearch}`,
       searchOptions
     );
     console.log(searchedData);
     setAnimeData(searchedData);
+    
     setAnimeSearch("")
   };
 
