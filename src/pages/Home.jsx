@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 import Genre from "../components/Genre";
 import SearchAnime from "../components/SearchAnime";
 import Slider from "../components/Slider";
@@ -7,7 +7,7 @@ import Slide2 from "../assets/images/slide-2.jpg";
 import Slide3 from "../assets/images/slide-3.jpg";
 import Animes from "../components/Animes";
 import { options, fetchData, searchOptions } from "../fetchData";
-import ReactPaginate from 'react-paginate';
+import ReactPaginate from "react-paginate";
 
 const heroSliderImgs = [
   {
@@ -23,26 +23,33 @@ const heroSliderImgs = [
 
 const Home = () => {
   const [animeData, setAnimeData] = useState([]);
-  const [currentItems, setCurrentItems] = useState(null);
+  const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
-  const [itemOffset, setItemOffset] = useState(0); 
-  const itemsPerPage = 10
+  const [itemOffset, setItemOffset] = useState(0);
+  const itemsPerPage = 10;
 
   useEffect(() => {
-    const fetchAnimes = async () => {
+    async function getAnime() {
       const fetchedAnimes = await fetchData(
         `https://anime-db.p.rapidapi.com/anime?page=1&size=50`,
         searchOptions
       );
-      console.log(fetchedAnimes)
-      setAnimeData(fetchedAnimes.data);
-    };
-    fetchAnimes()
-    const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-    setCurrentItems(animeData.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(animeData.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage]);
+      return fetchedAnimes;
+    }
+
+    getAnime().then(data=>{
+      setAnimeData(data.data)
+      
+    })
+    if(animeData){
+      const endOffset = itemOffset + itemsPerPage;
+      console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+      setCurrentItems(animeData.slice(itemOffset, endOffset));
+      setPageCount(Math.ceil(animeData.length / itemsPerPage));
+    }
+
+    }, [itemOffset, itemsPerPage, animeData]);
+
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % animeData.length;
@@ -57,7 +64,7 @@ const Home = () => {
       <Slider data={heroSliderImgs} perPage={1} />
       <SearchAnime setAnimeData={setAnimeData} />
       <Genre />
-      {currentItems ? <Animes animeData={currentItems} /> : "loading...." }
+      {currentItems ? <Animes animeData={currentItems} /> : "loading...."}
       <ReactPaginate
         breakLabel="..."
         nextLabel="next >"
