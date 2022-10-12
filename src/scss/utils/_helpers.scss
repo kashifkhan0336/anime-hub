@@ -8,3 +8,48 @@
     font-size: clamp(1.8rem, 1.66rem + 0.7vw, 2.5rem);
     color: var(--text);
 }
+
+.paginate-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    list-style: none;
+}
+
+.page{
+	padding: 10px;
+    border: 1px solid var(--primary);
+    color: var(--text);
+    border-radius: 6px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.disabled{
+    cursor: not-allowed;
+    
+}
+
+.active{
+	background-color: var(--primary);
+    color: var(--black);
+    font-weight: bold;
+}
+
+.previous{
+    padding: 10px;
+    border-radius: 6px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.break{
+    padding: 10px;
+}
+
+.next{
+    padding: 10px;
+    border-radius: 6px;
+    margin-right: 10px;
+    cursor: pointer;
+}
