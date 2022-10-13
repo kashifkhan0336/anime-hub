@@ -27,9 +27,9 @@ const Home = () => {
   const [pageCount, setPageCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const handleFetch = async () => {
+  const handleFetch = async (page_number) => {
     const animes = await fetchData(
-      `https://anime-db.p.rapidapi.com/anime?page=${currentPage}&size=10`,
+      `https://anime-db.p.rapidapi.com/anime?page=${page_number}&size=10`,
       searchOptions
     )
     console.log(animes)
@@ -39,14 +39,18 @@ const Home = () => {
   };
 
   useEffect(()=>{
-    handleFetch()
+    handleFetch(1)
   }, [])
 
 
   const handlePageChange = (selectedObject) => {
+    console.log("Page Handle Called!")
     console.log(selectedObject)
-		setCurrentPage(selectedObject.selected);
-		handleFetch();
+		//setCurrentPage(selectedObject.selected);
+    if(selectedObject.selected == 0){
+      handleFetch(1);
+    }
+		handleFetch(selectedObject.selected+1)
 	};
 
   return (
